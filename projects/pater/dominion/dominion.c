@@ -735,7 +735,7 @@ int playMinion(int handPos, int currentPlayer, struct gameState *state, int choi
     {
       if (i != currentPlayer)
       {
-        if ( state->handCount[i] > 4 )
+        if ( state->handCount[i] >= 4 )
         {
           //discard hand
           while( state->handCount[i] > 0 )
@@ -743,8 +743,8 @@ int playMinion(int handPos, int currentPlayer, struct gameState *state, int choi
             discardCard(handPos, i, state, 0);
           }
                   
-              //draw 4
-              for (j = 0; j < 4; j++)
+          //draw 4
+          for (j = 0; j < 4; j++)
           {
             drawCard(i, state);
           }
