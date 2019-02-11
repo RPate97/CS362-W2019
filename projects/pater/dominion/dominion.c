@@ -584,7 +584,7 @@ int getCost(int cardNumber)
 {
   switch( cardNumber ) 
     {
-    case curse:
+    case curse: 
       return 0;
     case estate:
       return 2;
