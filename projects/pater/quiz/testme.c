@@ -5,14 +5,25 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+    char* area = "[({ ax})]"; //create character area
+    int randNum = rand() % 9; //select number
+    return area[randNum]; //return char based on number
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+    char* area = "reset"; //create character area
+    char* randResult = malloc(6); //allocate heap string for result
+    int x = 0;
+    for(x = 0; x < 6; x++){ //loop through string
+      int y = rand() % 6; //generate random number
+      if(y < 5){
+        randResult[x] = area[y]; //use number to populate result string
+      }else{
+        randResult[x] = '\0'; //since the above method appears to not workin on null terminators add it manually when number 5 is generated
+      }
+    }
+    return randResult; //return result
 }
 
 void testme()
