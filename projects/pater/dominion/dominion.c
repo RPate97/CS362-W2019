@@ -247,7 +247,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
 	
   //get card played
   card = handCard(handPos, state);
-	
+
   //check if selected card is an action
   if ( card < adventurer || card > treasure_map )
     {
@@ -259,10 +259,8 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     {
       return -1;
     }
-	
   //reduce number of actions
   state->numActions--;
-
   //update coins (Treasure cards may be added with card draws)
   updateCoins(state->whoseTurn, state, coin_bonus);
 	
@@ -668,19 +666,19 @@ int playAdventurer(int drawntreasure, struct gameState *state, int currentPlayer
     }
     drawCard(currentPlayer, state);
     int cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-    if (cardDrawn == copper || cardDrawn == copper || cardDrawn == gold) //classic bug, ya know that time when your lazy and copy and paste your conditional state with the intention of changing it to what you need and then you don't?
+    if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold) {//classic bug, ya know that time when your lazy and copy and paste your conditional state with the intention of changing it to what you need and then you don't?
       drawntreasure++;                                                   //Yeah that's what happened here. Now silver treasure wont be counted towards your drawntreasure count so it'll keep drawing even if it draws silver treasure until it gets 2 gold/copper cards
-    else{
+    }else{
       temphand[z]=cardDrawn;
       state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
       z++;
     }
-        }
-        while(z-1>=0){
-    state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
-    z=z-1;
   }
-  return 0;
+    while(z-1>=0){
+    	state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; // discard all cards in play that have been drawn
+    	z=z-1;
+    }
+    return 0;
 }
 
 //salvager function
