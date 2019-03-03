@@ -40,6 +40,7 @@ int validateResults(struct gameState *state, struct gameState *backupState){
 }
 
 int main (int argc, char** argv) {
+    printf("TESTING CARD: Adventurer\n");
     srand(time(0));
 
     struct gameState state; //create states

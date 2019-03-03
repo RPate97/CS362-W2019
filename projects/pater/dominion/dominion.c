@@ -685,7 +685,7 @@ int playAdventurer(int drawntreasure, struct gameState *state, int currentPlayer
 int playSalvager(struct gameState *state, int choice1, int currentPlayer, int handPos){
   //+1 buy
   state->numBuys++;
-  
+
   if (choice1)
   {
     //gain coins equal to trashed card
@@ -1206,7 +1206,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case salvager:
-      playSalvager(state, choice2, currentPlayer, handPos);
+      playSalvager(state, choice1, currentPlayer, handPos);
       return 0;
 		
     case sea_hag:

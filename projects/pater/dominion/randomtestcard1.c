@@ -10,36 +10,29 @@
 
 //validate ending game state
 int validateResults(struct gameState *state, struct gameState *backupState){
-    /*if(state->numActions != (backupState->numActions - 1)){ //check if number of actions correct
+    if(state->handCount[state->whoseTurn] != backupState->handCount[backupState->whoseTurn] + 2){
         printf("*****************************\n");
         printf("Starting GameState: \n");
-        printGameState(backupState); //print gamestate
-        printf("Starting Actions: %d\n", backupState->numActions); //print relevant values
-        printf("Ending Actions: %d\n", state->numActions);
-        printf("Error incorrect number of actions after playing adventurer\n"); //print error
-        return 0;
-    }else if(state->coins <= backupState->coins){ //check if number of coins correct
-        printf("*****************************\n");
-        printf("Starting GameState: \n");
-        printGameState(backupState); //print gamestate
-        printf("Starting coins: %d\n", backupState->coins); //print relevant values
-        printf("Ending coins: %d\n", state->coins);
-        printf("Error incorrect number of coins after playing adventurer\n"); //print error
-        return 0;
+        printGameState(backupState); //print gamestate 
+        printf("Starting handCount: %d\n", backupState->handCount[backupState->whoseTurn]); //print relevant values
+        printf("Ending handCount: %d\n", state->handCount[state->whoseTurn]);
+        printf("Error incorrect number of cards in hand after playing smithy\n"); //print error
     }else if(state->discardCount[state->whoseTurn] <= backupState->discardCount[backupState->whoseTurn]){ //check if number of discards correct
         printf("*****************************\n");
         printf("Starting GameState: \n");
         printGameState(backupState); //print gamestate 
         printf("Starting Discard Count: %d\n", backupState->discardCount[backupState->whoseTurn]); //print relevant values
         printf("Ending Discards: %d\n", state->discardCount[state->whoseTurn]);
-        printf("Error incorrect number of discards after playing adventurer\n"); //print error
+        printf("Error incorrect number of discards after playing smithy\n"); //print error
         return 0;
     }else{
         return 1;
-    }*/
+    }
+    return 2;
 }
 
 int main (int argc, char** argv) {
+    printf("TESTING CARD: Smithy\n");
     srand(time(0));
 
     struct gameState state; //create states
@@ -51,18 +44,7 @@ int main (int argc, char** argv) {
     do{
         generateGameState(&state); //generate random state
 
-        int deckIsEmpty = rand() % 101; //gen random number for if deck is empty (doing this to get full coverage of the adventurer card function) 1% chance
-        if(deckIsEmpty == 100){
-            int curPlayer = state.whoseTurn;
-            int y;
-            for(y = 0; y < state.deckCount[curPlayer]; y++){
-                state.discard[curPlayer][y] = state.deck[curPlayer][y]; //copy deck into discards
-                state.deck[curPlayer][y] = 0; //0 out the deck
-            }
-            state.deckCount[curPlayer] = 0; //set deck count to 0
-        }
-
-        state.hand[state.whoseTurn][0] = adventurer; //put adventurer in hand since we're testing it
+        state.hand[state.whoseTurn][0] = smithy; //put smithy in hand since we're testing it
         copyGameState(&state, &backupState); //create backup of gamestate for comparison and reset
         playCard(0, 0, 0, 0, &state);
         if(validateResults(&state, &backupState) == 0){
