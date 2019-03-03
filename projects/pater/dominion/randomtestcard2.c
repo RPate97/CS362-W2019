@@ -11,38 +11,7 @@
 //validate ending game state
 int validateResults(struct gameState *state, struct gameState *backupState, int choice){
 
-    //seems to be a problem getting the right card from the players hand
-
-    int choiceCost = getCost(handCard(choice, state));
-
-    /*if(state->numBuys != (backupState->numBuys + 1)){ //check if number of actions correct
-        printf("*****************************\n");
-        printf("Starting GameState: \n");
-        printGameState(backupState); //print gamestate
-        printf("Starting Buys: %d\n", backupState->numBuys); //print relevant values
-        printf("Ending Buys: %d\n", state->numBuys);
-        printf("Error incorrect number of buyss after playing salvager\n"); //print error
-        return 0;
-    }else if(state->coins != backupState->coins + choiceCost){ //check if number of coins correct
-        printf("*****************************\n");
-        printf("Starting GameState: \n");
-        printGameState(backupState); //print gamestate
-        printf("Starting coins: %d\n", backupState->coins); //print relevant values
-        printf("Ending coins: %d\n", state->coins);
-        printf("Error incorrect number of coins after playing salvager\n"); //print error
-        return 0;
-    }else if(state->discardCount[state->whoseTurn] <= backupState->discardCount[backupState->whoseTurn]){ //check if number of discards correct
-        printf("*****************************\n");
-        printf("Starting GameState: \n");
-        printGameState(backupState); //print gamestate 
-        printf("Starting Discard Count: %d\n", backupState->discardCount[backupState->whoseTurn]); //print relevant values
-        printf("Ending Discards: %d\n", state->discardCount[state->whoseTurn]);
-        printf("Error incorrect number of discards after playing salvager\n"); //print error
-        return 0;
-    }else{
-        return 1;
-    }*/
-
+    int choiceCost = getCost(handCard(choice, state)); //get cost of card being discarded
     int failedOne = 0;
     int failedTwo = 0;
     int failedThree = 0;
