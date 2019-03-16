@@ -1257,13 +1257,13 @@ static int _adventurer(struct gameState* state, int currentPlayer)
          drawntreasure++;
       else
       {
-         //temphand[z] = cardDrawn; (ORIGINAL)
-         temphand[++z] = cardDrawn; // BUG INTRODUCED (could cause an out of bounds error if user draws beyond max hand size) and
+         //temphand[++z] = cardDrawn; (bugged)
+         temphand[z] = cardDrawn; //Fixed by Ryan Pate // BUG INTRODUCED (could cause an out of bounds error if user draws beyond max hand size) and
                                     // this function isn't following the rules of the game anyway, which state that you may only
                                     // reshuffle your discard pile at most once.
             // This should just remove the top card (the most recently drawn one).
          state->handCount[currentPlayer]--; 
-         //z++; (ORIGINAL)
+         z++; //(ORIGINAL) readded by Ryan Pate
       }
    }
 
@@ -1405,8 +1405,8 @@ static int _smithy(struct gameState* state, int currentPlayer, int handPos)
       drawCard(currentPlayer, state);
 
       // Discard card from hand
-   //discardCard(handPos, currentPlayer, state, 0); // (ORIGINAL)
-   discardCard(currentPlayer, handPos, state, 0); // (BUG INTRODUCED). Instead of discard handPos card from current player, it will discard
+   discardCard(handPos, currentPlayer, state, 0); // fixed by Ryan Pate
+   //discardCard(currentPlayer, handPos, state, 0); // (BUG INTRODUCED). Instead of discard handPos card from current player, it will discard
                                                   // card number currentPlayer from player number handPos. If the handPos is ≤ number of players
                                                   // this seems like it could easily escape detection.
 
